@@ -1,6 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const cors = require("cors");
+
 const products = require("./routes/products");
 // load env variables
 dotenv.config({
@@ -8,6 +10,14 @@ dotenv.config({
 });
 
 const app = express();
+
+app.use(
+  cors({
+    origin: true, // allow requests from any origin
+    // credentials: true,
+    optionSuccessStatus: 200,
+  })
+);
 
 // body parser (we cannot send json directly so we need to parse it with express)
 app.use(express.json());
